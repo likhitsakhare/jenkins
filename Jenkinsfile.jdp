@@ -3,11 +3,14 @@ pipeline {
         stages {
             stage("stage1-pull"){
                 steps {
+                    git branch: 'main', url: 'https://github.com/abhilashmwaghmare/EasyCRUD.git'
                     echo "Pull Successful"
                 }
             }
             stage("stage2-build"){
                 steps {
+                    sh '''cd backend
+                    mvn clean package -DskipTests'''
                     echo "Build Successful"
                 }
             }
