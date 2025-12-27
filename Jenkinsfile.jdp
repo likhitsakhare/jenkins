@@ -3,7 +3,7 @@ pipeline {
         stages {
             stage("stage1-pull"){
                 steps {
-                    git branch: 'main', url: 'https://github.com/abhilashmwaghmare/EasyCRUD.git'
+                    git branch: 'devops', url: 'https://github.com/abhilashmwaghmare/EASY_CRUD.git'
                     echo "Pull Successful"
                 }
             }
@@ -16,11 +16,8 @@ pipeline {
             }
             stage("stage3-test"){
                 steps {
-                    withSonarQubeEnv('sonar') {
-                        sh '''
-                        cd backend
-                        mvn clean verify -DskipTests org.sonarsource.scanner.maven:sonar-maven-plugin:3.10.0.2594:sonar -Dsonar.projectKey=studentappJenkins -Dsonar.projectName=studentappJenkins
-                        '''
+                    withSonarQubeEnv(installationName: 'sonarqube' credentialsId: 'sonar-token') {
+                        
                     }
                     echo "Test Successful"
                 }
