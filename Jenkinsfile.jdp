@@ -16,7 +16,7 @@ pipeline {
             }
             stage("stage3-test"){
                 steps {
-                    withSonarQubeEnv(installationName: 'sonarqube' credentialsId: 'sonar-token') {
+                    withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonar-token') {
                         
                     }
                     echo "Test Successful"
