@@ -17,7 +17,12 @@ pipeline {
             stage("stage3-test"){
                 steps {
                     withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonar-token') {
-                        
+                        sh ''' 
+                        cd backend
+                        mvn sonar:sonar \
+                        -Dsonar.projectKey=studentapp \
+                        -Dsonar.projectName='studentapp' \
+                        '''
                     }
                     echo "Test Successful"
                 }
