@@ -16,6 +16,14 @@ pipeline {
             }
             stage("stage3-test"){
                 steps {
+                    withSonarQubeEnv(credentialsId: 'sonar-token') {
+                        sh '''cd backend
+                            mvn clean verify sonar:sonar \\
+                            -Dsonar.projectKey=studentappJenkins \\
+                            -Dsonar.projectName=\'studentappJenkins\' \\
+                            -Dsonar.host.url=http://13.53.134.172:9000 \\
+                            -Dsonar.token=sqp_9e3009c323a69319312bf9d202f8bfad12e4d316'''
+                    }
                     echo "Test Successful"
                 }
             }
